@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "complaints",
+  "info": {
+    "singularName": "complaint",
+    "pluralName": "complaints",
+    "displayName": "complaint"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nama": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "pesan": {
+      "type": "string"
+    },
+    "kategori": {
+      "type": "enumeration",
+      "enum": [
+        "Informasi",
+        "Kendala",
+        "Saran"
+      ]
+    },
+    "jawaban_admin": {
+      "type": "text"
+    },
+    "sudah_dibalas": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
