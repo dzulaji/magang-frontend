@@ -1,23 +1,36 @@
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
-import StrukturOrganisasi from "./pages/StrukturOrganisasi";
+import ProfilPejabat from "./pages/ProfilPejabat";
 import DetailPejabat from "./pages/DetailPejabat";
+import StrukturOrganisasi from "./pages/StrukturOrganisasi";
+import VisiMisi from "./pages/VisiMisi";
+import TugasFungsi from "./pages/TugasFungsi";
+import ProfilBpjph from "./pages/ProfilBpjph";
+import ScrollToTop from "./components/ScrollToTop";
+import HubungiKami from "./pages/HubungiKami";
 
 function App() {
   return (
-    <Routes>
-      {/* Semua route di dalam sini akan pakai Navbar & Footer */}
-      <Route path="/" element={<MainLayout />}>
-        {/* Halaman Beranda */}
-        <Route index element={<Home />} />
+    <>
+      <ScrollToTop />
 
-        {/* Halaman Struktur Organisasi */}
-        <Route path="struktur-organisasi" element={<StrukturOrganisasi />} />
-        {/* Halaman Detail Pejabat */}
-        <Route path="struktur-organisasi/:id" element={<DetailPejabat />} />
-      </Route>
-    </Routes>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+
+          <Route path="struktur-organisasi" element={<StrukturOrganisasi />} />
+
+          <Route path="profil-pejabat" element={<ProfilPejabat />} />
+          <Route path="profil-pejabat/:id" element={<DetailPejabat />} />
+
+          <Route path="visi-misi" element={<VisiMisi />} />
+          <Route path="tugas-fungsi" element={<TugasFungsi />} />
+          <Route path="profil-bpjph" element={<ProfilBpjph />} />
+          <Route path="hubungi-kami" element={<HubungiKami />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 

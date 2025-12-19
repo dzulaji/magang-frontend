@@ -7,7 +7,7 @@ const Navbar = () => {
     {
       title: "Tentang Kami",
       items: [
-        { name: "Profil BPJPH", path: "/profil" },
+        { name: "Profil BPJPH", path: "/profil-bpjph" },
         { name: "Visi dan Misi", path: "/visi-misi" },
         { name: "Tugas dan Fungsi", path: "/tugas-fungsi" },
         { name: "Struktur Organisasi", path: "/struktur-organisasi" }, // Ini yang sudah aktif
@@ -115,6 +115,13 @@ const Navbar = () => {
               className="px-4 py-2 text-sm font-medium hover:bg-white/10 rounded-md transition-colors"
             >
               Beranda
+            </Link>
+
+            <Link
+              to="/hubungi-kami"
+              className="px-4 py-2 text-sm font-medium hover:bg-white/10 rounded-md transition-colors"
+            >
+              Hubungi Kami
             </Link>
 
             {/* Loop Menu Data untuk membuat Dropdown otomatis */}

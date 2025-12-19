@@ -21,7 +21,7 @@ const Footer = () => {
         {/* --- BAGIAN ATAS: 4 KOLOM --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* KOLOM 1: Logo, Identitas & Sosmed */}
-          <div className="space-y-6">
+          <div className="space-y-6 lg:pl-12">
             <div className="flex items-center space-x-3">
               <div className="p-1.5 w-14 h-18 flex items-center justify-center overflow-hidden">
                 <img
@@ -115,8 +115,8 @@ const Footer = () => {
           </div>
 
           {/* KOLOM 2: Alamat */}
-          <div>
-            <h3 className="text-lg font-bold mb-6 pb-2 border-b-2 border-white/30 inline-block">
+          <div className="lg:pl-12">
+            <h3 className="lg:pl-5text-lg font-bold mb-6 pb-2 border-b-2 border-white/30 inline-block">
               Alamat
             </h3>
             <address className="not-italic text-sm text-gray-300 space-y-3 leading-relaxed">
@@ -188,7 +188,7 @@ const Footer = () => {
           </div>
 
           {/* KOLOM 4: Tautan Cepat (Platform) */}
-          <div>
+          <div className="lg:pl-12">
             <h3 className="text-lg font-bold mb-6 pb-2 border-b-2 border-white/30 inline-block">
               Tautan Cepat
             </h3>

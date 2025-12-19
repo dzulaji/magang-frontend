@@ -1,197 +1,61 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Eye } from "lucide-react";
+
+// --- IMPORT GAMBAR BAGAN DARI ASSETS ---
+// Pastikan nama filenya sesuai dengan yang kamu simpan di folder assets
+// Kalau formatnya JPG, ganti jadi .jpg
+import imgStruktur from "../assets/struktur-organisasi.jpg";
 
 const StrukturOrganisasi = () => {
-  // 1. STATE
-  // Kita inisialisasi langsung dengan array kosong dulu
-  const [pejabat, setPejabat] = useState([]);
-  const [loading, setLoading] = useState(true);
+  return (
+    <div className="container mx-auto px-4 py-12 max-w-7xl font-sans min-h-screen">
+      {/* --- HEADER KAPSUL (Sama seperti Profil Pejabat biar konsisten) --- */}
+      <div className="flex justify-center mb-12">
+        <div className="border-2 border-purple-800 bg-white rounded-[60px] py-10 px-8 md:px-20 text-center shadow-sm max-w-4xl mx-auto">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#4a0054] to-purple-500 mb-2 tracking-tight uppercase">
+            STRUKTUR ORGANISASI
+          </h1>
+          <p className="text-gray-500 text-lg md:text-xl font-medium">
+            Bagan Struktur Organisasi BPJPH
+          </p>
+        </div>
+      </div>
 
-  // --- DATA DUMMY (PENGGANTI API) ---
-  const dummyData = [
-    {
-      id: 1,
-      documentId: "pimpinan-1",
-      nama: "Dr. H. Ahmad Haikal Hasan",
-      jabatan: "Kepala BPJPH",
-      foto: null, // Foto null akan memicu placeholder
-    },
-    {
-      id: 2,
-      documentId: "pimpinan-2",
-      nama: "Dr. H. Arfi Hatim, M.Ag",
-      jabatan: "Wakil Kepala BPJPH",
-      foto: null,
-    },
-    {
-      id: 3,
-      documentId: "sekretaris-1",
-      nama: "Dr. H. Muhammad Aqil Irham, M.Si",
-      jabatan: "Sekretaris Utama BPJPH",
-      foto: null,
-    },
-    {
-      id: 4,
-      documentId: "pengawas-1",
-      nama: "H. Khairul Huda Basyir",
-      jabatan: "Kepala Pusat Pembinaan dan Pengawasan",
-      foto: null,
-    },
-    {
-      id: 5,
-      documentId: "kerjasama-1",
-      nama: "Hj. Siti Aminah, S.Ag",
-      jabatan: "Kepala Pusat Kerjasama dan Standardisasi",
-      foto: null,
-    },
-    {
-      id: 6,
-      documentId: "deputi-1",
-      nama: "Prof. Dr. Ir. Chuzaemi",
-      jabatan: "Deputi Bidang Jaminan Produk Halal",
-      foto: null,
-    },
-    {
-      id: 7,
-      documentId: "direktur-1",
-      nama: "Dr. Subandriyah",
-      jabatan: "Direktur Pelayanan Sertifikasi",
-      foto: null,
-    },
-  ];
-
-  // 2. EFFECT (Simulasi Loading sebentar lalu isi Data Dummy)
-  useEffect(() => {
-    // Simulasi delay biar berasa kayak loading data beneran
-    setTimeout(() => {
-      setPejabat(dummyData);
-      setLoading(false);
-    }, 1000);
-  }, []);
-
-  // --- LOGIKA FILTERING (Sama seperti sebelumnya) ---
-  const pimpinanUtama = pejabat.filter((item) => {
-    const jabatan = item.jabatan?.toLowerCase() || "";
-    return jabatan.includes("kepala bpjph") || jabatan.includes("wakil kepala");
-  });
-
-  const sekretariat = pejabat.filter((item) => {
-    const jabatan = item.jabatan?.toLowerCase() || "";
-    return jabatan.includes("sekretaris") || jabatan.includes("pengawas") || jabatan.includes("pusat");
-  });
-
-  const deputi = pejabat.filter((item) => {
-    const jabatan = item.jabatan?.toLowerCase() || "";
-    return jabatan.includes("deputi") || jabatan.includes("direktur");
-  });
-
-  // Komponen Kartu (Sesuai Desain Ungu/Putih)
-  const PejabatCard = ({ item }) => {
-    const { nama, jabatan, foto, documentId, id } = item;
-    const linkId = documentId || id;
-
-    // URL Foto Dummy (Pakai placeholder service biar kelihatan ada gambar)
-    // Jika nanti API nyala, ganti logic ini dengan `foto?.url`
-    const imgUrl = "https://ui-avatars.com/api/?background=f3e8ff&color=6b21a8&size=300&name=" + nama;
-
-    return (
-      <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow group">
-        {/* Foto Frame */}
-        <div className="aspect-square bg-gray-100 rounded-md mb-4 overflow-hidden relative">
+      {/* --- AREA GAMBAR --- */}
+      <div className="bg-white p-4 md:p-8 rounded-3xl shadow-lg border border-gray-100">
+        {/* Container gambar dengan overflow agar bisa di-scroll jika di HP gambarnya kebesaran */}
+        <div className="overflow-x-auto flex justify-center">
           <img
-            src={imgUrl}
-            alt={nama}
-            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+            src={imgStruktur}
+            alt="Bagan Struktur Organisasi BPJPH"
+            className="max-w-full h-auto md:max-w-[90%] lg:max-w-[85%] object-contain"
           />
         </div>
 
-        {/* Info */}
-        <div className="mb-4">
-          <h3 className="font-bold text-gray-900 text-sm md:text-base leading-tight mb-1 line-clamp-2 h-10">
-            {nama}
-          </h3>
-          <p className="text-purple-800 text-xs md:text-sm font-bold uppercase tracking-wide">
-            {jabatan}
-          </p>
-        </div>
-
-        {/* Button */}
-        <Link
-          to={`/struktur-organisasi/${linkId}`}
-          className="inline-flex items-center gap-2 bg-purple-800 hover:bg-purple-900 text-white text-[10px] md:text-xs font-medium py-2 px-4 rounded-full transition-colors w-full justify-center sm:w-auto"
-        >
-          <Eye size={14} />
-          Selengkapnya
-        </Link>
-      </div>
-    );
-  };
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-800"></div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="container mx-auto px-4 py-10 max-w-6xl font-sans min-h-screen">
-
-      {/* 1. HEADER KAPSUL */}
-      <div className="border-2 border-purple-800/30 rounded-[50px] py-10 px-6 text-center mb-14 max-w-4xl mx-auto shadow-sm bg-white">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-purple-900 mb-2 uppercase tracking-tight">
-          PROFIL PEJABAT
-        </h1>
-        <p className="text-gray-500 font-medium">
-          Pejabat Struktural Badan Penyelenggara Jaminan Produk Halal
-        </p>
-      </div>
-
-      {/* 2. SECTION: PIMPINAN UTAMA */}
-      <div className="mb-14">
-        <h2 className="text-xl font-bold uppercase text-gray-800 mb-3 tracking-wide pl-1">
-          PIMPINAN UTAMA
-        </h2>
-        {/* Garis Divider Ungu */}
-        <div className="h-[2px] bg-purple-300 w-full mb-8"></div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {pimpinanUtama.map((item, idx) => (
-            <PejabatCard key={idx} item={item} />
-          ))}
+        {/* Tombol Download (Opsional, biar user bisa simpan gambarnya) */}
+        <div className="mt-8 text-center">
+          <a
+            href={imgStruktur}
+            download="Struktur-Organisasi-BPJPH.png"
+            className="inline-flex items-center justify-center gap-2 bg-purple-700 hover:bg-purple-800 text-white font-semibold py-3 px-8 rounded-full transition-all shadow-md hover:shadow-lg"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              />
+            </svg>
+            Unduh Gambar Resolusi Penuh
+          </a>
         </div>
       </div>
-
-      {/* 3. SECTION: SEKRETARIAT */}
-      <div className="mb-14">
-        <h2 className="text-xl font-bold uppercase text-gray-800 mb-3 tracking-wide pl-1">
-          SEKRETARIAT & PENGAWAS
-        </h2>
-        <div className="h-[2px] bg-purple-300 w-full mb-8"></div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {sekretariat.map((item, idx) => (
-            <PejabatCard key={idx} item={item} />
-          ))}
-        </div>
-      </div>
-
-      {/* 4. SECTION: DEPUTI */}
-      <div className="mb-14">
-        <h2 className="text-xl font-bold uppercase text-gray-800 mb-3 tracking-wide pl-1">
-          DEPUTI BIDANG
-        </h2>
-        <div className="h-[2px] bg-purple-300 w-full mb-8"></div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {deputi.map((item, idx) => (
-            <PejabatCard key={idx} item={item} />
-          ))}
-        </div>
-      </div>
-
     </div>
   );
 };
